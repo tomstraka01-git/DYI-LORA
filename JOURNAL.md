@@ -93,3 +93,76 @@ I had forgot to add the capacitors and resistors to EN and BOOT pin on the MCU, 
 
 ### Time Spent: 6 Hours
 
+# Journal #3 June 15:  Battery charging, protection circuit, buzzer, vibration motor, gps, compas, debugging, cardKB, memory lcd
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG3.png)
+
+## Display
+I think i dont want a tft display, sure they are multicolor and look good, but they take a lot of power. I had researched different displays, and found out there are few optioins:
+- Oled 
+- TFT
+- E-Paper
+- Memory LCD
+Oleds are cheap and good looking, but only few colors usually and take a lot of power and are usually small. So for this project i dont think an oled is good for it. TFT looks good, but takes too much power so no. E-Paper takes almost no power, but it takes time to refresh. Memory LCD is like e-paper, but it can refresh more times. It only refreshs when it needs to, so it saves power and takes little power. I chose Memory LCD. I found one on laskakit and i changed the gpio connections sp they match. 
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG1.png)
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG4.png)
+
+## Vibration Motor
+If the user recieves a message, how does he know he recieved it, that is a problem that the current schematic has. I need to implement some type of alarming system. One of those can be vibration motor. I found few online, and made a MOSFET controll schematic. It is powered from 3.3V, and only turns on when the gpio pin is pulled high through the resistor. I also have a flyback diode and some pull down resistors there.
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG10.png)
+
+
+## cardKB
+I need to have some kind of control on the pager. I have seen designs with just normal buttons, rotary encoder + buttons or keyboards. I myself tried few, but found out there is a small, easy to connect keyboard by m5stack called cardKB. It has many keys, is small and uses only two data lines. That makes it best for my design, i can have the keys be used as a normal messanging keyboard and when not messanging, different keys can do different functions.
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG12.png)
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG5.png)
+
+
+## GPS and Compas
+I dont currently have any sensors. I looked at what other pagers sometimes have that i dont and that is:
+- Barometer
+- Compas
+- GPS
+- Tempature
+- 
+For now i have decided to add GPS and compas.
+I found few cheap gps modules. One i connected, but he had to have external antena, and i didnt want to deal with it. Others were too pricey. Then i found GPS VG7669T160N0MA. It is not overpriced, has antena inside and only 4 pins to connect, the last two doesnt need to be connected. I connected it on kicad. I also had to find a jst footprint, because it uses only jst connector.
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG7.png)
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG11.png)
+For compas i chose the QMC5883P. I had connected it to free esp32 s3 pins and adde dsome resistors and capacitors to it.
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG8.png)
+
+I will usethe compas and gps module in software propably like this:
+- You can read, save or text your contacts your gps location (Maybe also have like a tool that can show you the saved path when you get lost?)
+- When you send your contact the location, and they send it to you. You can start finding them, it would tell you how much you need to turn + how much meters away from you in that direction they are. It is not like maps, but it would work for when your lost somewhere.
+- Also maybe like have pinpointed locations like where you parked your car, where is your home etc, then you can find them using the gps.
+
+For now the gps data would be stored in flash. The esp32 s3 would have few mb left, and that is enough for now. Maybe later i will add a microSD card if needed.
+
+# Power
+The last time, the power only came from usb and the ldo. I want to add a battery charging and management circuit and when  not using usb, the battery would be used instead. This seemed easy, but was really hard. I spent like half a day working on this. It took me some time to find the components. I used:
+- TP4056
+- DW01A
+- FS8205A
+- APK2112K -3.3v
+
+First i had some ics different, but then i came to these, like the ldo had too low maximum current. This took ma a lot of time to corretfully connect, still i dont know if it is 100% correct. The problem was: i needed the FS8205A, but it was not in kicad, i tried to find it online, but i didnt or it was paid. So then i realized it was just two mosfets together, so i tried to make it myself. But there were many errors and i spent a lot of time debugging. Then i found out that i can download it from some kicad tool, using kicad python terminal and i found the schematic and the footprint. I also added protection features to the circuit like diode, fuse etc. I also added the protection for battery (under and over charging, short, etc.) wich is done by DW01A. I also changed all gnds to prot_gnd, wich can be disconnected by the DW01A, when something goes wrong, so the battery works. And then i had a problem, the circuit woudlnt know when to switch the battery and usb power. So i built i circuit using pnp MOSFET, that switches it on when there is no microUSB, and off when there is. 
+
+
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG2.png)
+
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG9.png)
+
+## Buzzer
+For now i just have a vibration motor for notifications, that works when you are near it, but you woudlnt hear it if it is in another room. That is why i added a buzzer. It uses a transistor to switch on, has a flyback diode and can be turned on with any gpio pin. You can also modulate loudnalss wich pwm i think? Now it should alert you when you get notification or something happens.
+![JOURNAL3-IMG](screenshots/JOURNAL3-IMG6.png)
+
+
+### Time Spent: 10 Hours
