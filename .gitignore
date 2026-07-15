@@ -1,4 +1,3 @@
-DYI-LORA-PCB.history/
-
-
 *.lck
+*.history/
+.DS_Store
