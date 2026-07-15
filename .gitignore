@@ -2,4 +2,5 @@
 *.history/
 .DS_Store
 
+**/~*.lck
 **/*.lck
