@@ -2456,6 +2456,195 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:Crystal"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "Y"
+				(at 0 3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Crystal"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Two pin crystal"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "quartz ceramic resonator oscillator"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Crystal*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Crystal_0_1"
+				(polyline
+					(pts
+						(xy -2.54 0) (xy -1.905 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.905 -1.27) (xy -1.905 1.27)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.143 2.54)
+					(end 1.143 -2.54)
+					(stroke
+						(width 0.3048)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.905 -1.27) (xy 1.905 1.27)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 0) (xy 1.905 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Crystal_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 1.27)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 1.27)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:D"
 			(pin_numbers
 				(hide yes)
@@ -8455,7 +8644,7 @@
 	)
 	(rectangle
 		(start 15.24 156.21)
-		(end 176.53 281.94)
+		(end 214.63 281.94)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -8490,8 +8679,8 @@
 		(uuid "b0e4874c-8054-4921-bae0-38a090f567c2")
 	)
 	(rectangle
-		(start 557.53 101.6)
-		(end 596.9 134.62)
+		(start 322.58 157.48)
+		(end 391.16 201.93)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -8587,7 +8776,7 @@
 	)
 	(text "RTC"
 		(exclude_from_sim no)
-		(at 577.088 97.79 0)
+		(at 326.898 160.528 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -8790,6 +8979,12 @@
 		(uuid "053f4436-83a3-454a-a015-1735dbab7e95")
 	)
 	(junction
+		(at 373.38 175.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "06d6ef1a-a8b1-4e40-999b-ffc50eef115a")
+	)
+	(junction
 		(at 151.13 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8800,6 +8995,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0c2a9321-34f1-4a0f-8012-d0874ef030a6")
+	)
+	(junction
+		(at 173.99 208.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1152b49a-cec1-462b-a788-255dd484373e")
 	)
 	(junction
 		(at 335.28 119.38)
@@ -8904,6 +9105,12 @@
 		(uuid "cd05b5d2-0daf-4801-9790-cc5744e476f7")
 	)
 	(junction
+		(at 356.87 167.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e118467c-468b-46c5-bacc-4e461e847184")
+	)
+	(junction
 		(at 332.74 35.56)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8944,6 +9151,16 @@
 			(type default)
 		)
 		(uuid "07dddb30-29ad-4329-81c1-7b1b5264940f")
+	)
+	(wire
+		(pts
+			(xy 173.99 208.28) (xy 185.42 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "086be37b-7400-49df-a151-9bea3ba65b9c")
 	)
 	(wire
 		(pts
@@ -9017,6 +9234,16 @@
 	)
 	(wire
 		(pts
+			(xy 335.28 180.34) (xy 344.17 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d30f9b0-a92c-40b2-ae98-49a0035faec3")
+	)
+	(wire
+		(pts
 			(xy 273.05 185.42) (xy 273.05 186.69)
 		)
 		(stroke
@@ -9074,6 +9301,16 @@
 			(type default)
 		)
 		(uuid "393a1e55-ba9c-491e-bf10-ca5bc19fd531")
+	)
+	(wire
+		(pts
+			(xy 41.91 132.08) (xy 40.64 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a8f5e09-259c-4455-a1fd-73dd97deb99d")
 	)
 	(wire
 		(pts
@@ -9247,6 +9484,16 @@
 	)
 	(wire
 		(pts
+			(xy 369.57 175.26) (xy 373.38 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66ba9402-d334-49eb-8c67-421b2d2fd188")
+	)
+	(wire
+		(pts
 			(xy 267.97 269.24) (xy 267.97 252.73)
 		)
 		(stroke
@@ -9254,6 +9501,16 @@
 			(type default)
 		)
 		(uuid "67fd056e-f149-4c98-8c82-bb3d5d5003b6")
+	)
+	(wire
+		(pts
+			(xy 335.28 187.96) (xy 344.17 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6de65de9-41e3-4e00-9d41-59765801f5c7")
 	)
 	(wire
 		(pts
@@ -9297,6 +9554,16 @@
 	)
 	(wire
 		(pts
+			(xy 356.87 187.96) (xy 356.87 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c1c0c52-a7a8-42f7-a019-6e336e9f710e")
+	)
+	(wire
+		(pts
 			(xy 96.52 181.61) (xy 96.52 182.88)
 		)
 		(stroke
@@ -9337,6 +9604,16 @@
 	)
 	(wire
 		(pts
+			(xy 377.19 175.26) (xy 373.38 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86686704-95f0-4b82-9e12-91790fb68594")
+	)
+	(wire
+		(pts
 			(xy 273.05 182.88) (xy 273.05 181.61)
 		)
 		(stroke
@@ -9357,6 +9634,16 @@
 	)
 	(wire
 		(pts
+			(xy 356.87 167.64) (xy 373.38 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88f4a3d6-b24c-43fc-aa68-9f6555e1e836")
+	)
+	(wire
+		(pts
 			(xy 62.23 41.91) (xy 62.23 36.83)
 		)
 		(stroke
@@ -9364,6 +9651,16 @@
 			(type default)
 		)
 		(uuid "90074769-2b5e-4774-97a2-83a253971c9f")
+	)
+	(wire
+		(pts
+			(xy 344.17 187.96) (xy 344.17 182.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "922b1384-6a2e-416f-b159-b50a53fa9f4c")
 	)
 	(wire
 		(pts
@@ -9414,6 +9711,16 @@
 			(type default)
 		)
 		(uuid "98cc085f-dc4b-4e22-a43c-4f9f116eb515")
+	)
+	(wire
+		(pts
+			(xy 142.24 208.28) (xy 173.99 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9f7e8f59-10d9-4dbe-9cc9-991d39c44721")
 	)
 	(wire
 		(pts
@@ -9594,6 +9901,16 @@
 			(type default)
 		)
 		(uuid "ceec055b-dfe6-4768-a356-ca0a0f0005d8")
+	)
+	(wire
+		(pts
+			(xy 142.24 205.74) (xy 187.96 205.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d0e35b01-44fa-40ba-8a29-d1c51407e650")
 	)
 	(wire
 		(pts
@@ -9844,6 +10161,30 @@
 			(justify right bottom)
 		)
 		(uuid "bcbdfa51-dc5b-425d-a55f-e6f01cbaad79")
+	)
+	(global_label "SCL-RTC"
+		(shape input)
+		(at 180.34 208.28 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "07551c4a-50c6-4187-b9c3-4f384c5da40d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 180.34 219.8528 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 	)
 	(global_label "SYS_PWR"
 		(shape input)
@@ -10207,17 +10548,17 @@
 	)
 	(global_label "SCL-KB"
 		(shape input)
-		(at 142.24 208.28 0)
+		(at 185.42 208.28 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "317d6441-7f55-4d60-85e7-ab0a3623290e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 152.8452 208.28 0)
+			(at 185.42 218.8852 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10225,7 +10566,7 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 	)
@@ -10314,6 +10655,30 @@
 		(uuid "335ba3c3-c7ca-4268-8069-8e39b75bf7e8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 323.85 74.2262 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "SDA-RTC"
+		(shape input)
+		(at 187.96 205.74 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "34f4c9ec-e14c-462c-8e75-d0431eb8bb56")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 187.96 217.3733 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10458,6 +10823,30 @@
 		(uuid "3f6cd3a0-b4bd-41b6-b295-a60b8b7c3793")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 278.4542 190.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "BATT-"
+		(shape input)
+		(at 49.53 132.08 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "436d2304-5677-4720-86c3-3dc0cefc441a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 58.3814 132.08 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10661,6 +11050,30 @@
 			)
 		)
 	)
+	(global_label "INT-RTC"
+		(shape input)
+		(at 377.19 175.26 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6459b4e7-faa0-4de3-94df-03cac55cb2fb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 388.1581 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "BATT-"
 		(shape input)
 		(at 62.23 125.73 270)
@@ -10706,6 +11119,30 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+	)
+	(global_label "SDA-RTC"
+		(shape input)
+		(at 344.17 175.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6ba53b84-a5eb-405d-b570-c0849cafb313")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 332.5367 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 	)
@@ -10877,30 +11314,6 @@
 			)
 		)
 	)
-	(global_label "BATT+"
-		(shape input)
-		(at 295.91 182.88 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "8150e8f6-23d7-43c8-916c-cae67d01adee")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 304.7614 182.88 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
 	(global_label "SCK-DISPLAY"
 		(shape input)
 		(at 142.24 213.36 0)
@@ -10925,6 +11338,54 @@
 			)
 		)
 	)
+	(global_label "TEMP"
+		(shape input)
+		(at 40.64 132.08 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8405ce5d-de35-48f3-b169-0503b0e92804")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 40.64 124.2568 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "PROT-GND"
+		(shape input)
+		(at 356.87 162.56 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "856b7822-ffd8-40d7-8613-d88bfd9a4a02")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 343.6038 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
 	(global_label "CS-DW01A"
 		(shape input)
 		(at 127 87.63 0)
@@ -10946,6 +11407,30 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+	)
+	(global_label "BATT+"
+		(shape input)
+		(at 33.02 132.08 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8f46b2e9-3774-4f3f-ad99-b854313a047f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 24.1686 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 	)
@@ -11119,17 +11604,17 @@
 	)
 	(global_label "SDA-KB"
 		(shape input)
-		(at 142.24 205.74 0)
+		(at 182.88 205.74 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "9eadc8ca-3e1d-4d70-9f23-8abafa22f3b6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 152.9057 205.74 0)
+			(at 182.88 216.4057 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11137,7 +11622,7 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 	)
@@ -11311,7 +11796,7 @@
 	)
 	(global_label "PROT-GND"
 		(shape input)
-		(at 584.2 127 270)
+		(at 356.87 190.5 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11321,7 +11806,7 @@
 		)
 		(uuid "b31b2ba7-59d3-44e5-b00b-ee929b623feb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 584.2 140.2662 90)
+			(at 356.87 203.7662 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11346,6 +11831,30 @@
 		(uuid "b3e4cb34-bef5-42ff-97f2-4b7d95ebae1d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 58.42 67.8762 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "SCL-RTC"
+		(shape input)
+		(at 344.17 172.72 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b4eb83a4-a030-4552-aa25-b2d57d4e41c0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 332.5972 172.72 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11402,6 +11911,30 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+	)
+	(global_label "TEMP"
+		(shape input)
+		(at 74.93 113.03 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c1b16073-419e-4e90-918f-2161c7d4ea9d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 82.7532 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 	)
@@ -11538,6 +12071,30 @@
 		(uuid "d3b0525b-4254-4799-96b4-582efac780de")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 309.1762 185.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "INT-RTC"
+		(shape input)
+		(at 142.24 248.92 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d822534a-2a8b-4835-a037-3b9a3b4f7474")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 153.2081 248.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12087,6 +12644,85 @@
 			(project "DYI-LORA-PCB"
 				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
 					(reference "#PWR025")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 173.99 212.09 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1937e514-a4fb-41ff-87a2-1f2e1422debc")
+		(property "Reference" "R17"
+			(at 166.37 214.122 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10kiloOhms"
+			(at 166.37 211.836 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 175.768 212.09 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 173.99 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 173.99 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "35e85c16-f19d-4a46-a220-d4bb1c28d036")
+		)
+		(pin "2"
+			(uuid "b4e75328-00f5-4d39-8f64-cb46686bbdef")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "R17")
 					(unit 1)
 				)
 			)
@@ -13081,6 +13717,87 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:Crystal")
+		(at 335.28 184.15 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "38b7b6e5-e58a-4608-8833-8d691125fdc7")
+		(property "Reference" "Y1"
+			(at 331.724 185.674 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "Crystal"
+			(at 331.724 183.134 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm"
+			(at 335.28 184.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 335.28 184.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Two pin crystal"
+			(at 335.28 184.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "11e6209e-b5c9-465b-98d8-acc75649ce19")
+		)
+		(pin "2"
+			(uuid "bb17211e-d7bc-4658-8e2d-02d6dee0175a")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "Y1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "qmc5883p:QMC5883P")
 		(at 256.54 251.46 0)
 		(unit 1)
@@ -13712,8 +14429,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Timer_RTC:PCF85063ATL")
-		(at 576.58 119.38 0)
+		(lib_id "power:+3.3V")
+		(at 295.91 182.88 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -13722,9 +14439,87 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
+		(uuid "46e4ec22-71f2-44e3-927f-e16a0e358db7")
+		(property "Reference" "#PWR035"
+			(at 292.1 182.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 299.72 182.8799 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 295.91 182.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 295.91 182.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 295.91 182.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "994f0516-b954-4332-b34f-115c167158a1")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "#PWR035")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Timer_RTC:PCF85063ATL")
+		(at 356.87 177.8 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
 		(uuid "4723af80-f51c-4d5b-8863-dcbd93c28a69")
 		(property "Reference" "U4"
-			(at 578.7233 106.68 0)
+			(at 362.204 162.814 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13735,7 +14530,7 @@
 			)
 		)
 		(property "Value" "PCF85063ATL"
-			(at 578.7233 109.22 0)
+			(at 362.204 165.354 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13746,7 +14541,7 @@
 			)
 		)
 		(property "Footprint" "Package_DFN_QFN:DFN-10-1EP_2.6x2.6mm_P0.5mm_EP1.3x2.2mm"
-			(at 576.58 99.06 0)
+			(at 356.87 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13757,7 +14552,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.nxp.com/docs/en/data-sheet/PCF85063A.pdf"
-			(at 576.58 139.7 0)
+			(at 356.87 198.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13768,7 +14563,7 @@
 			)
 		)
 		(property "Description" "I2C Real-Time Clock Calendar w/ Alarm, DFN-10"
-			(at 576.58 119.38 0)
+			(at 356.87 177.8 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15015,6 +15810,163 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 177.8 200.66 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7981783b-ab09-4de7-9da8-bc6df3341bfa")
+		(property "Reference" "R16"
+			(at 185.42 198.628 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10kiloOhms"
+			(at 185.42 200.914 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 176.022 200.66 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 177.8 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 177.8 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "36aecb87-5517-4134-8dcb-d8b5420e323e")
+		)
+		(pin "2"
+			(uuid "25cd4cf8-96bc-43e8-afdb-63104b01b764")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 173.99 215.9 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7be22907-9830-4ae1-bc6e-ea90230c55a7")
+		(property "Reference" "#PWR034"
+			(at 173.99 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 173.99 220.98 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 173.99 215.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 173.99 215.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 173.99 215.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "91895ed4-6211-4b97-8f14-2fd78ae09dfb")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "#PWR034")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
 		(at 68.58 74.93 0)
 		(unit 1)
@@ -15440,6 +16392,84 @@
 			(project "DYI-LORA-PCB"
 				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
 					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 177.8 196.85 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "932b3a20-fd2d-469b-8d80-7d04ef83b998")
+		(property "Reference" "#PWR033"
+			(at 177.8 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 177.8 191.77 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 177.8 196.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 177.8 196.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 177.8 196.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "62a6c15b-7377-49fa-bc2a-0068ca8ec0b5")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -16153,6 +17183,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 36.83 132.08 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ab62170c-f7e7-4164-a329-ca4ba7404cc0")
+		(property "Reference" "R18"
+			(at 34.798 128.016 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10kiloOhms"
+			(at 34.798 125.73 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 36.83 133.858 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 36.83 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 36.83 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4f5a0d84-05e3-4604-b758-88427225d704")
+		)
+		(pin "2"
+			(uuid "ae30a11f-566f-435f-b70d-87d9808fd08b")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "R18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 232.41 38.1 90)
 		(unit 1)
@@ -16546,6 +17655,166 @@
 			(project "DYI-LORA-PCB"
 				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
 					(reference "C16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 356.87 165.1 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c3941d69-bbae-4fc4-a599-3f8b3fbe4f32")
+		(property "Reference" "C18"
+			(at 358.648 165.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nanoFarad"
+			(at 342.138 165.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 356.87 165.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 356.87 165.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 356.87 165.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "92fb5fb6-1fc6-479f-ab30-f3c1bab842eb")
+		)
+		(pin "2"
+			(uuid "717d79df-de86-4677-bf10-b533ce8d38d2")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "C18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 45.72 132.08 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c4da0644-3de0-4d0a-90b0-2b2de2e0e4f5")
+		(property "Reference" "R19"
+			(at 48.768 128.016 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10kiloOhms"
+			(at 48.768 125.73 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 45.72 133.858 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 45.72 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "939a1b62-3187-4ae8-b4ee-79ee38d21890")
+		)
+		(pin "2"
+			(uuid "7e0c26d9-ce84-46df-90ce-bc5b819696cc")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "R19")
 					(unit 1)
 				)
 			)
@@ -16955,6 +18224,85 @@
 			(project "DYI-LORA-PCB"
 				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
 					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 355.6 167.64 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ca5b48aa-c7ff-4f9d-ba47-6c2c8dead202")
+		(property "Reference" "#PWR032"
+			(at 359.41 167.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 351.79 167.6399 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 355.6 167.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 355.6 167.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 355.6 167.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7fadf1bf-22ce-4b5a-97bd-9f94d7d50e7b")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -18134,7 +19482,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_SPDT")
-		(at 203.2 171.45 0)
+		(at 434.34 358.14 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -18144,7 +19492,7 @@
 		(dnp no)
 		(uuid "eae531e2-357b-401b-8f56-2db02c69051d")
 		(property "Reference" "SW3"
-			(at 203.2 162.56 0)
+			(at 434.34 349.25 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18154,7 +19502,7 @@
 			)
 		)
 		(property "Value" "MTS-102"
-			(at 203.2 165.1 0)
+			(at 434.34 351.79 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18164,7 +19512,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 203.454 178.054 0)
+			(at 434.594 364.744 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18174,7 +19522,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 203.2 179.07 0)
+			(at 434.34 365.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18185,7 +19533,7 @@
 			)
 		)
 		(property "Description" "Switch, single pole double throw"
-			(at 203.2 171.45 0)
+			(at 434.34 358.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18374,6 +19722,85 @@
 			(project "DYI-LORA-PCB"
 				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
 					(reference "Q1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 373.38 171.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f199bff6-8fa9-4768-8b0a-0476c6d3d994")
+		(property "Reference" "R15"
+			(at 381 169.418 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10kiloOhms"
+			(at 381 171.704 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 371.602 171.45 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 373.38 171.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 373.38 171.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9b9addeb-db6a-4b10-9389-167f42f3cbdd")
+		)
+		(pin "2"
+			(uuid "f99ea0f2-79fa-4339-a625-171fbe02bff8")
+		)
+		(instances
+			(project "DYI-LORA-PCB"
+				(path "/9c5d07ff-0fd5-4f09-a88e-013f009740ed"
+					(reference "R15")
 					(unit 1)
 				)
 			)

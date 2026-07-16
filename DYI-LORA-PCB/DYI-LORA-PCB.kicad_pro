@@ -648,7 +648,7 @@
         "uuid": "9c5d07ff-0fd5-4f09-a88e-013f009740ed"
       }
     ],
-    "used_designators": "",
+    "used_designators": "Y1,R15-19,#PWR32-35,BT1,C18",
     "variants": []
   },
   "sheets": [

@@ -166,3 +166,200 @@ For now i just have a vibration motor for notifications, that works when you are
 
 
 ### Time Spent: 10 Hours
+
+# Journal #4
+
+## RTC (real time clock)
+
+
+For now the pager has clock, but only inside the esp32 s3. When esp32 s3 is not active, the time is lost. That is why i need an rtc. It will track time even when other devices are disconnected. It almost zero current and is fairly small. I found a cheap small chip on lcsc, connected it and added resistors, capacitors and the oscillating crystal. It can be powered either from:
+- Coin cell battery
+- The main battery
+
+It uses i2c, and i know i2c can be multidevice, so i connected it to the i2c pins i already, use. I also added pull-up resistors to it. 
+![JOURNAL4-IMG](screenshots/JOURNAL4-IMG3.png)
+
+![JOURNAL4-IMG](screenshots/JOURNAL4-IMG2.png)
+
+
+## Temp 
+I realized that the temp pin on tp4056 must be connected, else the chip woudlnt start. I connected it to voltage divider 10/10kohms from battery, so it reads around 1.8v.
+
+![JOURNAL4-IMG](screenshots/JOURNAL4-IMG4.png)
+![JOURNAL4-IMG](screenshots/JOURNAL4-IMG5.png)
+
+
+## Software
+Now that i have the main parts of the schematic design done, i need to move on to firmware. I wanted meshtastic communication, so i researched about meshtastic and i have few options:
+- Write my own meshtastic protocol from scratch (gives me total control, but would take super much time, like thousands of lines of code).
+- Copy the protocol parts of the meshtastic repo, and add my drivers and ui.
+- Modify the meshtastic pinout for my board.
+
+I will not do option 1 for now, because it would take so much time. I tried option 3: I downloaded the official repo, and modified the pins for my esp32 s3 board. That would work but problem is: I use different display totally then is supported, i would need to write my own firmware. And also i would need to navigate the massive meshtastic codebase. And i would like something like arduino ide library, where you can just copy the protocoling part, and make you own ui. But that does not exist yet. So with those options, i chose to not do meshtastic for now, and make just classic pager. Maybe i will add meshtastic later, but for now i need to test that the basic things even work.
+![JOURNAL4-IMG](screenshots/JOURNAL4-IMG1.png)
+
+## Arduino IDE
+So i started writing the code. I started with importing libraries for my components.
+```
+#include <Wire.h>
+#include <SPI.h>
+#include <RadioLib.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SharpMem.h>
+#include <RTClib.h>  
+```
+I did not add a gps/compas library yet. I will first focus on basic functionality, then the gps/compas. Then i set the pins and variables i am using. I use i2c for cardKB and the rtc, that is why i have different addresses. I also set things like display resolution and variables for stopping buzzing/vibe (vibration mottor).
+![JOURNAL4-IMG](screenshots/JOURNAL4-IMG8.png)
+
+```
+
+// I2C Pins 
+#define I2C_SDA 41  
+#define I2C_SCL 42
+
+// LoRa (RFM95W)
+#define RFM_NSS 8
+#define RFM_RST 9
+#define RFM_DIO0 14
+#define RFM_DIO1 21
+// SPI Pins used by RFM95: SCK=12, MOSI=11, MISO=13
+
+// Memory LCD SPI Pins 
+#define SHARP_SCK 36
+#define SHARP_MOSI 35
+#define SHARP_SS 34
+#define DISPLAY_WIDTH 400 
+#define DISPLAY_HEIGHT 240
+
+
+bool vibeActive = false;
+unsigned long vibeEndTime = 0;
+
+bool buzzerActive = false;
+unsigned long buzzerEndTime = 0;
+
+#define VIB_MOTOR_PIN 3   
+#define BUZZER_PIN 45  
+
+// M5Stack CardKB I2C Address
+#define CARDKB_I2C_ADDR 0x5F
+
+SX1276 lora = new Module(RFM_NSS, RFM_DIO0, RFM_RST, RFM_DIO1);
+
+// Sharp Memory LCD 
+Adafruit_SharpMem display(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+int current_screen1_btn_slctd = 0; // 0 for messages, 1 for location, 2 for settings
+
+int current_screen = 0; // 0 for main menu, 1 for messages, 2 for location, 3 for settings
+
+
+String message_notification = "";
+// RTC 
+RTC_PCF8563 rtc;
+
+```
+The variable like current screen means wich screen i currently am on (ui). I will have 4 screens for now with different purposes. The variable currentscreen1 button selected, is for ui button, which has rectangles around them, and when you are on that button, just the rectangle about that specific button will be displayed, not the other ones. Message notification is not done yet, but will be  for notifications on the homa page.
+
+## UI screen 1
+I found a free online sofrware called lopaka, you can put your display size in there and draw ui menus and then copy the code. I have made different designs, but stuck with the one, where there are three buttons:
+- Messages (here will be main lora messages)
+- Location (GPS + compas together, maybe some location functions)
+- Settings (The settings)
+
+I also display time date and battery percent (but i dont have the voltage divider circuit in schematic i need to add it)
+![JOURNAL4-IMG](screenshots/JOURNAL4-IMG6.png)
+![JOURNAL4-IMG](screenshots/JOURNAL4-IMG7.png)
+
+The second version looks little bit better.
+The code for the first screen looks like this:
+```
+void drawScreen_main(void) {
+  DateTime now = rtc.now();
+
+  display.clearDisplay();
+  
+  //Time & Battery
+  display.setTextColor(1);
+  display.setTextSize(2);
+  display.setTextWrap(false);
+  display.setCursor(265, 5);
+  display.printf("Time: %02d:%02d", now.hour(), now.minute());
+
+  display.setCursor(289, 24);
+  display.print("Bat: 100%");
+  
+  display.setCursor(102, 61);
+  display.printf("Date: %02d/%02d/%04d", now.day(), now.month(), now.year());
+
+  // Title
+  display.setTextSize(4);
+  display.setCursor(11, 4);
+  display.print("Lora Pager");
+
+  
+  
+  // Messages Button
+  display.setTextSize(3);
+  display.setCursor(121, 102);
+  display.print("Messages");
+  if (current_screen1_btn_slctd == 0) {
+    display.drawRect(115, 96, 154, 33, 1); 
+  
+  //Location Button
+  display.setCursor(122, 151);
+  display.print("Location");
+  if (current_screen1_btn_slctd == 1) {
+    display.drawRect(115, 144, 154, 35, 1); 
+  }
+  
+  // Settings Button 
+  display.setCursor(122, 201);
+  display.print("Settings");
+  if (current_screen1_btn_slctd == 2) { 
+    display.drawRect(115, 194, 155, 35, 1); 
+  }
+  
+
+    // string 11
+    display.setTextSize(1);
+    display.setCursor(10, 45);
+    display.print(message_notification);
+
+  display.refresh(); 
+}
+
+```
+``` 
+void loop() {
+  updatePeripherals();
+
+  // Read Keyboard 
+  char key = readCardKB();
+  if (key != 0) {
+    Serial.print("Key Pressed: ");
+    Serial.println((uint8_t)key, HEX); 
+    
+    switch (current_screen) {
+      case 0: // Main Menu
+        if (key == 0xB5) { // UP Key
+       
+          current_screen1_btn_slctd = (current_screen1_btn_slctd + 2) % 3;
+          triggerVibe(40);
+          drawScreen_main(); 
+        } 
+        else if (key == 0xB6) { // DOWN Key
+          current_screen1_btn_slctd = (current_screen1_btn_slctd + 1) % 3;
+          triggerVibe(40);
+          drawScreen_main(); 
+        }
+        break;
+    }
+  }
+
+  // Check for incoming LoRa  
+  checkIncomingLoRa();
+}
+```
+In the code i also have functions to activate buzzer or vibration motor for some specific time, also i have a function to read cardKB and to transmit or recieve lora. Next i want to make the screen for messaging and make like channels for the lora? Like channel 1 to 4 and each device tunes to the specific one.
+
+### Time Spent: 7 Hours
