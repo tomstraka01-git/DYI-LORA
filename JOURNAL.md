@@ -1,4 +1,4 @@
-# Journal #1 June 11: Starting the project
+# Journal #1 July 11-13: Starting the project
 
 
 ## What do i want to do?
@@ -23,7 +23,7 @@ Next i will create a kicad project and try to decide wich options to go with.
 ### Time spent: 2 hours
 
 
-# Journal #2 June 13: 
+# Journal #2 July 13-15: 
 
 ![JOURNAL2-IMG](screenshots/JOURNAL2-IMG3.png)
 
@@ -93,7 +93,7 @@ I had forgot to add the capacitors and resistors to EN and BOOT pin on the MCU, 
 
 ### Time Spent: 6 Hours
 
-# Journal #3 June 15:  Battery charging, protection circuit, buzzer, vibration motor, gps, compas, debugging, cardKB, memory lcd
+# Journal #3 July 15:  Battery charging, protection circuit, buzzer, vibration motor, gps, compas, debugging, cardKB, memory lcd
 
 ![JOURNAL3-IMG](screenshots/JOURNAL3-IMG3.png)
 
@@ -167,7 +167,7 @@ For now i just have a vibration motor for notifications, that works when you are
 
 ### Time Spent: 10 Hours
 
-# Journal #4
+# Journal #4 RTC and firmware July 16
 
 ## RTC (real time clock)
 
@@ -362,4 +362,292 @@ void loop() {
 ```
 In the code i also have functions to activate buzzer or vibration motor for some specific time, also i have a function to read cardKB and to transmit or recieve lora. Next i want to make the screen for messaging and make like channels for the lora? Like channel 1 to 4 and each device tunes to the specific one.
 
+### Time Spent: 6 Hours
+
+
+# Journal 5: July 16-17
+
+
+
+So i have started designing the ui in lopaka, i made a contacts window, but then i relized that i wont use contacts, because i dont use meshtastic and i would propably use channels. But i dont really know anything about the chanels in the 868 mhz spectrum. Then i found these legal bands and limits for them:
+- K (863 MHz - 865 MHz): 0.1%, 25 mW ERP
+- L (865 MHz - 868 MHz): 1%, 25 mW ERP
+- M (868 MHz - 868.6 MHz): 1%, 25 mW ERP
+- N (868.7 MHz - 869.2 MHz): 0.1%, 25 mW ERP
+- P (869.4 MHz - 869.65 MHz): 10%, 500 mW ERP
+- Q (869.7 MHz - 870 MHz): 1%, 25 mW ERP
+
+I chose the 869.525mhz, because you have maximum 500mw (the biggest out of them) and you have a 10% duty cycle.
+
+![JOURNAL5-IMG](screenshots/JOURNAL5-IMG1.png)
+
+### What is duty cycle?
+Duty cycle means how many percent of miliseconds can you transmit per some time like an hour. So 10$ duty cycle means that your device can trasnmit only for 6 minutes per hour. That is like 10 times bigger that the other duty cycles or even 100 times. Since i am using messages, that should be no problem If i send one message with spreading factor of 9, it will take like 180ms transmitting. So in 1 hour i can send 30 something messages. Of course it depends how long the messages are, but it should be okay. I will add a timer in code, that will not let me transmit anymore messages if i hit the limit. Also the power limit is 500mw (27dbm) And my rf module can only output 20 dbm that is like 100mw, i can use a stronger antena, but still be in the legal limit.
+
+# Channels
+So i want to make the channels, but i have two options:
+1. Make different channels physically (like 868.2 and 868.3)
+2. Make one channel, but in software change that the correct pager only recieves the message.
+
+I choose option 2, since i dont have to change legal power limits each time switching a channel.
+
+I also need to structure the messages, i created a sctruct in the code, first it sends the target chanell, then the id of the pager and then the message (max 100 characters).
+
+```
+struct PagerPacket {
+  uint8_t targetChannel; // The Software Channel (like 1, 2, 3)
+  uint8_t senderId; // ID of the pager sending the message
+  char message[100]; // The text message (max 100 characters)
+};
+
+
+```
+Then i also change the settings of the lora module, i use the frequency 869.525mhz. 125khz bandwidth and spreading factor of 8. Coding rate 5. I set the settings and also set power limit to 20, since 27 is maximum legal, but my module can only do 20.
+```
+
+  // Carrier Freq: 869.525 MHz, Bandwidth: 125.0 kHz, Spreading Factor: 8, Coding Rate: 5 (4/5)
+  int state = lora.begin(869.525, 125.0, 8, 5); 
+  
+  // Set output power to maximum legal limit for this frequency (it is max 27 dBm, but my rf module has maximum 20)
+  lora.setOutputPower(20);
+
+```
+Then i added the variables for each pager like the id and current chanell. The id will be only one for each module and the chanell can be changed in the message menu.
+```
+uint8_t myPagerId = 1; // Unique ID of this pager
+uint8_t currentChannel = 1; // The channel this pager is currently tuned to
+```
+
+I also changed the sendloRaPacket function and the recieve function. It now sends the packet correctly in the format, and the recieve function filters it, if it is only on the correct chanell. Then it decodes it and displays it on the notification bar. I want to make that it displays only for a few time, like 3 seconds, or maybe until it automaticly refreshes idk. There are also error debugging functions over serial, so you can plug usb and find errors and also i have clamping for the message so it doesnt overflow the display.
+```
+void sendLoRaPacket(uint8_t targetChan, const char* textMsg) {
+  Serial.print(F("[LoRa] Sending custom pager packet... "));
+  
+
+  PagerPacket packet;
+  packet.targetChannel = targetChan;
+  packet.senderId = myPagerId;
+  
+  // Safely copy string message into packet array (limit to 99 chars + null terminator)
+  strncpy(packet.message, textMsg, sizeof(packet.message) - 1);
+  packet.message[sizeof(packet.message) - 1] = '\0'; 
+
+  // Transmit the raw bytes of the struct
+  int state = lora.transmit((uint8_t*)&packet, sizeof(packet));
+
+  if (state == RADIOLIB_ERR_NONE) {
+    Serial.println(F("Sent successfully!"));
+  } else {
+    Serial.print(F("Failed, code "));
+    Serial.println(state);
+  }
+}
+
+
+void checkIncomingLoRa() {
+  PagerPacket receivedPacket;
+  
+  // Read incoming raw data directly into the struct format
+  int state = lora.receive((uint8_t*)&receivedPacket, sizeof(receivedPacket));
+
+  if (state == RADIOLIB_ERR_NONE) {
+    
+    // Filtering
+    // Match current software channel or Channel 0 (System Broadcast)
+    if (receivedPacket.targetChannel == currentChannel || receivedPacket.targetChannel == 0) {
+      
+      Serial.print(F("[LoRa] Msg received on matching channel: "));
+      Serial.println(receivedPacket.targetChannel);
+      
+      triggerVibe(200);
+      triggerBuzzer(100);
+      
+    String msg = String(receivedPacket.message);
+
+    // Limit to first 20 characters
+    if (msg.length() > 20) {
+      msg = msg.substring(0, 20);
+    }
+
+    String message_notification =
+      "Ch " + String(receivedPacket.targetChannel) +
+      " From P" + String(receivedPacket.senderId) +
+      ":\n" + msg;
+
+    drawNotification(message_notification);
+      
+    } else {
+      // Message was on a different channel. Ignore it.
+      Serial.print(F("[LoRa] Ignored message for non-active channel: "));
+      Serial.println(receivedPacket.targetChannel);
+    }
+  }
+}
+```
+
+I added that the message stays on the screen until you press another key.
+
+
+## Duty cycle safety limit
+To comply with eu safety duty cycle limit, i created a safety filter, that doesnt let you send messages, if you use more duty cycle then you can legally. Here are the variables:
+```
+// Duty Cycle variables
+unsigned long windowStart = 0;
+unsigned long totalTxTime = 0;
+const unsigned long SIX_MINUTES = 360000; 
+const unsigned long MAX_TX_ALLOWANCE = 36000;
+```
+And here is the updated sendLoRaPacket function with the safety filter. It records the time and checks if you used your 6 minute window duty cycle. I chose 6 minute duty cycle, because 1 hour is too much to be waiting if you send all messages first minute, you have to wait whole hour, i made it that you reset it each 6 minutes
+```
+void sendLoRaPacket(uint8_t targetChan, const char* textMsg) {
+  unsigned long currentTime = millis();
+
+  if (currentTime - windowStart >= SIX_MINUTES) {
+    windowStart = currentTime;
+    totalTxTime = 0;
+  }
+
+  if (totalTxTime >= MAX_TX_ALLOWANCE) {
+    Serial.println(F("[LoRa] TX Limit Reached! Wait for next 6 minute window."));
+    message_notification = "TX Limit reached. Wait.";
+    triggerVibe(100);
+    if (current_screen == 0) {
+      drawScreen_main();
+    }
+    return;
+  }
+
+  Serial.print(F("[LoRa] Sending packet... "));
+  
+  PagerPacket packet;
+  packet.targetChannel = targetChan;
+  packet.senderId = myPagerId;
+  
+  strncpy(packet.message, textMsg, sizeof(packet.message) - 1);
+  packet.message[sizeof(packet.message) - 1] = '\0'; 
+
+  unsigned long txStart = millis();
+
+  int state = lora.transmit((uint8_t*)&packet, sizeof(packet));
+
+  unsigned long txDuration = millis() - txStart;
+  totalTxTime += txDuration;
+
+  if (state == RADIOLIB_ERR_NONE) {
+    Serial.print(F("Sent successfully! Time transmitting: "));
+    Serial.print(txDuration);
+    Serial.println(F(" ms"));
+  } else {
+    Serial.print(F("Failed, code "));
+    Serial.println(state);
+  }
+}
+```
+
+## The message screen
+So i designed the message screen. It has on the top info about current channel, battery and time. But i want to somehow be able to add text to the rectangles. I have one for typing the message and then one with message conversation. The problem is, that if i add the conversation into one single variable, it will go beyond the screen size. So i created a library that warps the text down if it hits the boundary. Then the text is displayed. Also you can change the channell with left or right button. I am using a cardKB datasheet, which tells me which key is named what in hex.
+
+![JOURNAL5-IMG](screenshots/JOURNAL5-IMG4.png)
+![JOURNAL5-IMG](screenshots/JOURNAL5-IMG5.png)
+![JOURNAL5-IMG](screenshots/JOURNAL5-IMG2.png)
+```
+#ifndef TEXTWRAP_H
+#define TEXTWRAP_H
+
+#include <Adafruit_SharpMem.h>
+
+inline int16_t printWrapped(Adafruit_SharpMem &d, int16_t x, int16_t y,
+                             uint16_t maxW, int16_t maxY,
+                             const String &text, uint8_t size = 1) {
+  uint16_t maxChars = maxW / (6 * size);
+  if (maxChars == 0) return y;
+  d.setTextSize(size);
+  for (uint16_t i = 0; i < text.length() && y + 8 * size <= maxY; i += maxChars, y += 8 * size + 2) {
+    d.setCursor(x, y);
+    d.print(text.substring(i, i + maxChars));
+  }
+  return y;
+}
+
+#endif
+```
+
+## LittleFS
+I also need to store the messages locally, i can use microSD card, but that takes more viring and time so for now i will use LittleFS (the mcu built in memory where you can store memory even after power off). I use a library to manage it and save and load it each time i send or recieve message. I save the id of the sender the chanell and the message.
+
+## Mechanical Switch
+In the schematic design, i dont really have a way of turning of the battery, i can only unplug it, which is annoying when it is screwed in a case. That is why i added a mechanical switch, which can handle the current and just disables all other devices. The RTC 3.3v has its power before the switch (it always needs little power) so it doesnt lose track of time when switched off.
+![JOURNAL5-IMG](screenshots/JOURNAL5-IMG3.png)
+
+
+### Time Spent: 6 hours
+
+
+# Journal 6 July 17- The PCB
+
+## RF footprint error
+So i have started making the pcb. I want to start with RF, because it needs the most specific conditions. But after importing the footprint i noticed an error. The RFM95W didnt have half of the pins there. It had the first 8 correct but the second half was mirroed the first eight, when there were supposed to be 8 different. This is not the official kicad library footprint, it is from some github repo so it can be with errors. 
+
+
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG14.png)
+
+
+
+I opened the footprint editor and there were just first 8 pins and on other side instead of 9 to 16, there were the same 8. So i fixed that and changed the other side to 9 to 16.
+
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG15.png)
+
+But that didnt work, the pins were same of them there but alot of them werent there. So then i figured there may be error in the schematic. So i opened the RFM9X schematic and looked at the pins. Some were correct but a lot of werent. So i found a official datasheet for the module and wrote the correct pins. Then i saved it and imported the footprint. 
+
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG16.png)
+
+That fixed one error but the pins were still mismatched. They were there but with differnt position. So i used a image of the module and matched it to the footprint.
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG1.png)
+
+Not it is correctly wired and i can move on to the designing part.
+
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG13.png)
+
+## ADC voltage divider.
+So for now in software i have just text bat: 100%. It is just static value and i realized that i dont have any reading of battery capacity. So i used voltage dividers 100kohms and 100kohms. Which cuts the voltage in half and then the esp32 reads the voltage through its adc pin.
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG12.png)
+
+
+## PCB
+
+## RTC
+I made the rtc in the back layer, so it isnt that much disrupted by the power circuit noise which is mostly front. I connected the capacitors and the oscillator. But i didnt know how to connect the capacitor to the 3.3v power source, because it would need to go all way around, which adds more noise. So after trying i made using  `v` command a pin to the front layer, and crossed the chip on the front layer. That allowed me to connect it with less length and less noise.
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG2.png)
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG3.png)
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG4.png)
+
+## Vibration Motor
+
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG5.png)
+
+## The power circuit
+So i somehow connected all the power circuit chips, conenctors capacitors, buttons fuses, etc. into one small mess. It took me pretty long, but it is pretty small. Maybe too small, because after making rectangles the size of the display and keyboard, i reliazed i have a lot of space.
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG7.png)
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG8.png)
+So you can see that the bigger rectangle is the cardKB, the middle one is the screen and the small red one is the gps module. I also connected things like buzzer, the buttons for boot and en for esp32, and some connetors. I have a lot of space there so i think i will maybe distance the components from the power circuit a little bit from themselves. Also i still need to connect a lot of things, but this took me a lot of time. The antena is in the back layer, because i will choose the one which can bend, so it will go from back, then band upwards. I also moved the crystal to different locations to try to move it away from digital and analog lines, because it is pretty sensitive
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG9.png)
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG10.png)
+![JOURNAL6-IMG](screenshots/JOURNAL6-IMG11.png)
+
+## Software
+Also in the software i have a read adc function, whihc reads the adc and then i call it in loop and update the display with the readings, for now it is linear (but battery discharge isnt). I will either keep the linear one or make nonlinear one.
+
+```
+void read_adc() {
+  int rawADC = analogRead(ADC_PIN);
+
+  float pinVoltage = (rawADC / ADC_MAX_VALUE) * V_REF;
+
+  battery_volt = pinVoltage * 2.0;
+
+}
+```
+
 ### Time Spent: 7 Hours
+
+

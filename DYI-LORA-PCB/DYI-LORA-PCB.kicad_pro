@@ -63,7 +63,7 @@
           "min_clearance": 0.5,
           "min_island_area": 10.0,
           "min_thickness": 0.25,
-          "pad_connection": 1,
+          "pad_connection": 2,
           "remove_islands": 0,
           "thermal_relief_gap": 0.5,
           "thermal_relief_spoke_width": 0.5
@@ -648,7 +648,7 @@
         "uuid": "9c5d07ff-0fd5-4f09-a88e-013f009740ed"
       }
     ],
-    "used_designators": "Y1,R15-19,#PWR32-35,BT1,C18",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [
