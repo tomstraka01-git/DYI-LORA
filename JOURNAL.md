@@ -583,7 +583,7 @@ In the schematic design, i dont really have a way of turning of the battery, i c
 ### Time Spent: 6 hours
 
 
-# Journal 6 July 17- The PCB
+# Journal 6 July 17 The PCB
 
 ## RF footprint error
 So i have started making the pcb. I want to start with RF, because it needs the most specific conditions. But after importing the footprint i noticed an error. The RFM95W didnt have half of the pins there. It had the first 8 correct but the second half was mirroed the first eight, when there were supposed to be 8 different. This is not the official kicad library footprint, it is from some github repo so it can be with errors. 
@@ -650,4 +650,65 @@ void read_adc() {
 
 ### Time Spent: 7 Hours
 
+# Journal 7 June 18
 
+## GPS
+I found a error in the shematic. The gps has rx and tx, but i connected gps tx to esp32 tx and the same with rx instead of gps tx to esp32 rx, that would make it that they would never talk with eachother. So i fixed that. Also There is a problem with gps. The pin 5 is on/off pin. I thought in the past the if left unconnected the module is active, but it needs to be high for the module to work. So i fixed that with tying the pin 5 to 3.3v from resistor.
+
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG1.png)
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG2.png)
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG3.png)
+## Circuit
+Here is how the whole circuit looks now. I have connected things in the meantime, moved some of things and tried few combinations. Now most of the things are connected.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG4.png)
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG5.png)
+## I2C problem
+Another problem. The i2c line (which has multiple devices connected to it), has multiple pull-up resistors, which could damage it and arent needed there, so i removed the additional ones and kept only one near the mcu.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG6.png)
+## RF gnd zone
+Now for the rf circuit. I need to connect the pins and also put something like a ground zone over it. I have heard of it but dont know what is it.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG7.png)
+So i have researched about the gnd zone little bit. I created one in kicad with ctrl shift z command and set some parameters and created like a rectangle around the rf circuit on the back layer. I also need to do one for front. But after looking at some other circuits with rf, i realized that most of them have the gnd zone over all of the circuit. So i made one over all of the pcb on the front and the back layer.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG8.png)
+But it didnt work, it didnt connect the grounds and for some reason looked weird. Then after debugging i found an error. I had connected all the gnds, the antena gnd and the gnds of the chip into the gnd pin, but i use prot gnd everywhere so it wouldnt complete a functional circuit. So i fixed it and then it worked.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG9.png)
+Then i also noticed that the traces (gnd ones) i drew earlier were still there, it doesnt do anything negative, just looks better without them, because it is all gonna be filled with the zone pour.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG10.png)
+I filled the zone with command b on both sides and now it looks like the other circuits.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG11.png)
+## The power button problem
+So i have the power button for manually turning off the whole circuit, but the problem is that it is under the keyboard, so it wouldnt be pressably. I can try to put it out of the keyboards range, but then it would go the 3.3v trace 100mm there and then 100mm back, so that is not efficent. I can maybe try to buy a vertical one, and make like a side button like on phones. Or i can try to make some mechanical tring, which will press the button from another point. But i dont know for now.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG12.png)
+## Connecting the spi traces of rmf95w
+I also connected the rf module traces to the esp32 s3, Since there were already traces there, i needed to sometimes go to the opposite layer and back. But now they are succesfully connected.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG13.png)
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG14.png)
+### This is how it looks in 3D:
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG15.png)
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG16.png)
+## The 3D
+I also exported the pcb as step file and then created a fusion 360 project, where i imported the pcb. I also found on grabcad the cardKB keyboard. And on laskakits page, the e-shop where i will be buying the display, there is a github link, where i found the 3d model of the display. So i imported everything.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG17.png)
+Now i need to create the case around it. I want it to be as small as possible, but still fit all the things it needs.I created like a case around it, there are holes for the pcb mounting holes m3 bolts.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG18.png)
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG19.png)
+The connector i am using is for a antena, i found that the female antena connector needs 10 to 12 mm round free space, so it can be srewed in, so i made a hole around it.
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG20.png)
+
+## The antena
+So for the antena i need something cheap efficent and portable, and i found few possible ones on laskakit.
+1. One is 11cm one with 2.15dbm gain
+2. Two is 21cm with the same gain
+
+The difference is that the longer one would be more efficent because it is longer. I found a nonspecific antena on grabcad, they didnt have the specific and and i imported it. It was only 14cm long, So to make it the 21cm i tried extruding some sections, and after some time i created a 21cm version. Then i added joints to it and connected it to the connector. Now it looks ok. I need to choose between the:
+- 21cm antena
+- 11cm antena
+I will do a little bit  more research on the cons and pros of each version. For now this is how the asembly looks like:
+
+
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG21.png)
+![JOURNAL7-IMG](screenshots/JOURNAL7-IMG22.png)
+
+I still need to create the other half of the hatch, find a battery, check everything, finish software and ui, fix problem with the power button, but for now it looks good.
+
+### Time Spent: 5.5 Hours
